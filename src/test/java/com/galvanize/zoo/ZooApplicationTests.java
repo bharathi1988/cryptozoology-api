@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -28,8 +29,16 @@ class ZooApplicationTests {
 	@Autowired
 	private ObjectMapper mapper;
 
-	void setup() throws Exception{
-		this.addAnimalsTest();
+	String setup() throws Exception{
+		Animal animal = new Animal("Deer","walking");
+		mockmvc.perform(post("/zoo/animals")
+				.content(mapper.writeValueAsString(animal))
+				.contentType(MediaType.APPLICATION_JSON)
+		).andDo(MockMvcResultHandlers.print())
+				.andExpect(status().isCreated())
+				.andExpect(jsonPath("$.id").exists())
+				.andExpect(jsonPath("$.name").value("Deer"));
+		return animal.getId();
 	}
 
 	//Add animal(Post request) :   /zoo/animals — Adding animal to zoo and post use
@@ -50,11 +59,25 @@ class ZooApplicationTests {
 
 	@Test
 	void getAllAnimalsTest() throws Exception{
-		this.setup();
+		String id = this.setup();
 		mockmvc.perform(get("/zoo/animals"))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.length()").value(1));
+				.andExpect(jsonPath("$.length()").value(1))
+				.andExpect(jsonPath("$.[0].id").value(id));
 	}
 
+	@Test
+	void feedAnimalsTest() throws Exception{
+		String id = this.setup();
+
+		//Acceptance Criteria - 3a.
+		//Given an animal is unhappy When I give it a treat Then the animal is happy
+		mockmvc.perform(put("/zoo/animals")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(id))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.id").value(id))
+				.andExpect(jsonPath("$.mood").value("Happy"));
+	}
 
 }

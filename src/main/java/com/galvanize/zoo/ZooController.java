@@ -26,4 +26,9 @@ public class ZooController {
         return zooService.getAnimals();
     }
 
+    @PutMapping("/zoo/animals")
+    Animal feedAnimals(@RequestBody String id){
+        return zooService.feedAnimal(id);
+    }
+
 }

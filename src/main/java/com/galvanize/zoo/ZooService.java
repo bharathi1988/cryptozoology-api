@@ -12,14 +12,16 @@ public class ZooService {
     ZooRepository repository;
 
     public Animal addAnimal(Animal animal) {
-
-        repository.save(animal);
-
-        return new Animal(animal.getName(),animal.getType());
-        //return animal;
+        return repository.saveAndFlush(animal);
     }
 
     public List<Animal> getAnimals() {
         return repository.findAll();
+    }
+
+    public Animal feedAnimal(String id) {
+        Animal animal = repository.getOne(id);
+        animal.setMood("Happy");
+        return repository.saveAndFlush(animal);
     }
 }

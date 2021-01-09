@@ -2,6 +2,7 @@ package com.galvanize.zoo;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -10,7 +11,17 @@ public class Animal {
     private String id;
     private String name;
     private String type;
+    private String mood;
 
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", mood='" + mood + '\'' +
+                '}';
+    }
 
     public Animal(){
 
@@ -20,6 +31,7 @@ public class Animal {
         this.name = name;
         this.type = type;
         this.id = UUID.randomUUID().toString();
+        this.mood = "Unhappy";
     }
 
 
@@ -48,4 +60,24 @@ public class Animal {
         this.type = type;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Animal animal = (Animal) o;
+        return Objects.equals(id, animal.id) && Objects.equals(name, animal.name) && Objects.equals(type, animal.type) && Objects.equals(mood, animal.mood);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, type, mood);
+    }
+
+    public void setMood(String mood) {
+        this.mood = mood;
+    }
+
+    public String getMood() {
+        return mood;
+    }
 }
