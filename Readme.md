@@ -26,7 +26,8 @@ When I give it a treat
 Then the animal is still happy
 
 ---------------------------------------------------------------------------------
-As a zookeeper, I want to maintain different types of habitats so that I can put different types of animals in them.
+As a zookeeper, I want to maintain different types of habitats so that 
+I can put different types of animals in them.
 
 Given I have an empty <habitat>
 When I put animal of <type> into a compatible habitat
@@ -58,4 +59,28 @@ Then I see a list of animals matching only <mood> and <type>
 Given I have habitats in my zoo
 When I search for empty habitats
 Then I see a list of empty habitats
+
+---------------------------------------------------------------------------------
+
+Add animal(Post request) :   /zoo/animals — Adding animal to zoo and post use
+- 201 created 
+
+Get all Animals from ZOO (Get request) :   /zoo/animals
+- 200 
+
+Feed Animal - treat animal : /zoo/animals -- put animal name and type
+- 200 response , animal object as response
+
+Allocate habitat to the animal : /zoo/allocateanimals - post habitat and animal
+ - return 200 response , animal object as response
+
+Search animals based mood and type : /zoo/search - post mood and type
+
+- return 200 response also report of animals from zoo
+
+
+
+
+
+
 
