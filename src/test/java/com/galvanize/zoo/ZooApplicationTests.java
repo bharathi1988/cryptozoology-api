@@ -78,6 +78,15 @@ class ZooApplicationTests {
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.id").value(id))
 				.andExpect(jsonPath("$.mood").value("Happy"));
+		//Acceptance Criteria - 3a.
+		//Given an animal is unhappy When I give it a treat Then the animal is happy
+		mockmvc.perform(put("/zoo/animals")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(id))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.id").value(id))
+				.andExpect(jsonPath("$.mood").value("Happy"));
+
 	}
 
 }
