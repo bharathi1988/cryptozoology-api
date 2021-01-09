@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -27,6 +28,10 @@ class ZooApplicationTests {
 	@Autowired
 	private ObjectMapper mapper;
 
+	void setup() throws Exception{
+		this.addAnimalsTest();
+	}
+
 	//Add animal(Post request) :   /zoo/animals — Adding animal to zoo and post use
 	//- 201 created
 
@@ -41,6 +46,14 @@ class ZooApplicationTests {
 						.andExpect(jsonPath("$.id").exists())
 						.andExpect(jsonPath("$.name").value("Deer"));
 
+	}
+
+	@Test
+	void getAllAnimalsTest() throws Exception{
+		this.setup();
+		mockmvc.perform(get("/zoo/animals"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.length()").value(1));
 	}
 
 

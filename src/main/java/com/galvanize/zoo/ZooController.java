@@ -3,10 +3,10 @@ package com.galvanize.zoo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class ZooController {
@@ -19,6 +19,11 @@ public class ZooController {
     Animal addAnimal(@RequestBody Animal animal){
         return zooService.addAnimal(animal);
 
+    }
+
+    @GetMapping("/zoo/animals")
+    List<Animal> getAnimals(){
+        return zooService.getAnimals();
     }
 
 }

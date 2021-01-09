@@ -3,6 +3,8 @@ package com.galvanize.zoo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ZooService {
 
@@ -15,5 +17,9 @@ public class ZooService {
 
         return new Animal(animal.getName(),animal.getType());
         //return animal;
+    }
+
+    public List<Animal> getAnimals() {
+        return repository.findAll();
     }
 }
