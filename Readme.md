@@ -49,13 +49,12 @@ And the animal becomes unhappy
 Given I have an occuppied habitat
 When I put an animal into the occupied habitat
 Then the animal habitat should not change
-
+````
 |   type  |  habitat  |
-| --------- | --------- | 
+| --------- | :--------- | 
 | flying     |   nest    | 
 | swimming  |   ocean   | 
 | walking   |   forest  | 
-````
 ---------------------------------------------------------------------------------
 
 As a zookeeper, I want to search zoo data so that I can make reports on my zoo.
@@ -72,10 +71,10 @@ Then I see a list of empty habitats
 ---------------------------------------------------------------------------------
 |Functionality|Request Method|URI|Description|Status
 |-------------|:-------------|:---|:----------|-----:|
-|Add animal|Post|/zoo/animals|Adding animal to zoo| 201
-|Get all Animals from Zoo|Get|/zoo/animals|Get all animals from the Database|200 
-|Feed Animal - treat animal|Put|/zoo/animals| Pass in Animal ID and get the animal object as response|200
-|Allocate habitat to the animal|Post|/zoo/allocateanimals| post habitat and Animal ID, get animal object as response|200 
+|Add animal|POST|/zoo/animals|Adding animal to zoo| 201
+|Get all Animals from Zoo|GET|/zoo/animals|Get all animals from the Database|200 
+|Feed Animal - treat animal|PUT|/zoo/animals| Pass in Animal ID and get the animal object as response|200
+|Allocate habitat to the animal|POST|/zoo/allocateanimals| post habitat and Animal ID, get animal object as response|200 
 |Search animals|POST|/zoo/search|post report type to fetch the Animal Report|200
 
 
