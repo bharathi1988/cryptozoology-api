@@ -1,8 +1,20 @@
 package com.galvanize.zoo;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.UUID;
 
+@Entity
 public class Animal {
+    @Id
+    private String id;
+    private String name;
+    private String type;
+
+
+    public Animal(){
+
+    }
 
     public Animal(String name, String type) {
         this.name = name;
@@ -10,9 +22,7 @@ public class Animal {
         this.id = UUID.randomUUID().toString();
     }
 
-    private String name;
-    private String type;
-    private String id;
+
 
     public String getId() {
         return id;
