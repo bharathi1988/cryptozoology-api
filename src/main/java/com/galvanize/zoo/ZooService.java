@@ -24,4 +24,9 @@ public class ZooService {
         animal.setMood("Happy");
         return repository.saveAndFlush(animal);
     }
+
+    public Animal allocateAnimals(String id) {
+
+        return repository.findById(id).get();
+    }
 }

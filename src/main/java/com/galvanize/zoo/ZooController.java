@@ -31,4 +31,9 @@ public class ZooController {
         return zooService.feedAnimal(id);
     }
 
+    @PostMapping("/zoo/allocateanimals")
+    Animal allocateAnimals(@RequestBody String id){
+        return zooService.allocateAnimals(id);
+    }
+
 }

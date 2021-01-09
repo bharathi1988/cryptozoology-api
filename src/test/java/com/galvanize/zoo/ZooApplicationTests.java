@@ -89,4 +89,15 @@ class ZooApplicationTests {
 
 	}
 
+	@Test
+	void allocateAnimalsTest() throws Exception{
+		String id = this.setup();
+
+		mockmvc.perform(post("/zoo/allocateanimals")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(id))
+				.andExpect(status().isOk());
+				//.andExpect(jsonPath("$").exists());
+	}
+
 }
